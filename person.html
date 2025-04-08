@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王祥宇 | 产品经理作品集</title>
+    <meta name="description" content="王祥宇的产品经理作品集，展示B端SaaS产品管理经验与AI技术能力">
+    <!-- 引入字体和图标库 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            light: '#2563eb',
+                            dark: '#3b82f6'
+                        },
+                        secondary: {
+                            light: '#059669',
+                            dark: '#10b981'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 3px solid white;
+            z-index: 1;
+        }
+        .dark .timeline-item:before {
+            border-color: #1e293b;
+        }
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .dark .timeline:before {
+            background: #475569;
+        }
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .dark .metric-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+        .lazy-load {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .lazy-load.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+        .dark .skill-bar {
+            background: #475569;
+        }
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+        }
+        .project-card {
+            height: 100%;
+        }
+        .project-image-container {
+            height: 200px;
+        }
+        @media (min-width: 768px) {
+            .project-image-container {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans antialiased transition-colors duration-300">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-xl font-bold text-primary-light dark:text-primary-dark">王祥宇</span>
+                    <span class="text-sm bg-primary-light dark:bg-primary-dark text-white px-2 py-1 rounded-full">产品经理</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <nav class="hidden md:flex space-x-6">
+                        <a href="#summary" class="text-sm font-medium hover:text-primary-light dark:hover:text-primary-dark transition">个人优势</a>
+                        <a href="#experience" class="text-sm font-medium hover:text-primary-light dark:hover:text-primary-dark transition">工作经历</a>
+                        <a href="#projects" class="text-sm font-medium hover:text-primary-light dark:hover:text-primary-dark transition">项目成果</a>
+                        <a href="#ai" class="text-sm font-medium hover:text-primary-light dark:hover:text-primary-dark transition">AI探索</a>
+                        <a href="#contact" class="text-sm font-medium hover:text-primary-light dark:hover:text-primary-dark transition">联系我</a>
+                    </nav>
+                    <button class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" id="mobile-menu-button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-800">
+                <a href="#summary" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">个人优势</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">工作经历</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">项目成果</a>
+                <a href="#ai" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">AI探索</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700">联系我</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 英雄区域 -->
+        <section class="mb-20">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="md:w-1/2 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">你好，我是<span class="text-primary-light dark:text-primary-dark">王祥宇</span></h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">B端SaaS产品经理 | AI技术实践者 | AI降临派</p>
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="btn-hover bg-primary-light dark:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition">查看项目</a>
+                        <a href="#contact" class="btn-hover border border-primary-light dark:border-primary-dark text-primary-light dark:text-primary-dark px-6 py-3 rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition">联系沟通</a>
+                    </div>
+                </div>
+                <!-- <div class="md:w-1/2 relative">
+                    <div class="relative rounded-xl overflow-hidden shadow-xl">
+                        <img src="https://p3-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/e32e5c2ac04c4136b9a0fa4f0cf681b7.jpg" alt="王祥宇" class="w-full h-auto object-cover lazy-load" loading="lazy">
+                    </div>
+                <!-- </div> -->
+            </div>
+        </section>
+
+        <!-- 个人优势 -->
+        <section id="summary" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">核心<span class="text-primary-light dark:text-primary-dark">优势</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">结合B端产品管理经验与前沿AI技术能力，创造业务价值</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md metric-card lazy-load">
+                    <div class="text-primary-light dark:text-primary-dark text-3xl mb-3">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">产品全生命周期管理</h3>
+                    <p class="text-gray-600 dark:text-gray-300">主导企业SaaS产品迭代，成功推动产品迭代周期缩短15%</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md metric-card lazy-load">
+                    <div class="text-primary-light dark:text-primary-dark text-3xl mb-3">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">需求挖掘与价值交付</h3>
+                    <p class="text-gray-600 dark:text-gray-300">将复杂业务逻辑高效转化为产品特性，具备商业化思维</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md metric-card lazy-load">
+                    <div class="text-primary-light dark:text-primary-dark text-3xl mb-3">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">跨部门协作与资源整合</h3>
+                    <p class="text-gray-600 dark:text-gray-300">成功构建标杆客户SOP方法并推广至30+地区分支</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md metric-card lazy-load">
+                    <div class="text-primary-light dark:text-primary-dark text-3xl mb-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">AI技术应用能力</h3>
+                    <p class="text-gray-600 dark:text-gray-300">熟悉Prompt、Fine-tuning、RAG等技术，主导智能数据匹配项目(F1>90%)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工作经历 -->
+        <section id="experience" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">工作<span class="text-primary-light dark:text-primary-dark">经历</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">在B端SaaS产品领域的专业积累与成长历程</p>
+            </div>
+
+            <div class="relative pl-8 timeline">
+                <!-- 广联达科技 -->
+                <div class="relative mb-10 timeline-item lazy-load">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">广联达科技有限公司（B端SaaS）</h3>
+                            <span class="text-sm bg-primary-light dark:bg-primary-dark text-white px-3 py-1 rounded-full">2022.04 - 2024.08</span>
+                        </div>
+                        <div class="mb-4">
+                            <span class="inline-block bg-gray-100 dark:bg-gray-700 text-sm px-3 py-1 rounded-full mr-2 mb-2">产品经理</span>
+                            <span class="inline-block bg-gray-100 dark:bg-gray-700 text-sm px-3 py-1 rounded-full mr-2 mb-2">目标成本</span>
+                            <span class="inline-block bg-gray-100 dark:bg-gray-700 text-sm px-3 py-1 rounded-full mr-2 mb-2">企业数据库</span>
+                        </div>
+                        
+                        <h4 class="font-semibold mb-2 text-primary-light dark:text-primary-dark">工作职责：</h4>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">负责用户目标成本、企业数据库存的筛选产品，包括目标成本的快速优化、成本测算、合约规划、标准管理及咨询的三级审核等核心功能模块，完成50+项需求闭环，整体需求价值达标率80%以上。</p>
+                        
+                        <h4 class="font-semibold mb-2 text-primary-light dark:text-primary-dark">主要成就：</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>1项BG级个人荣誉，1项集团级团队荣誉</li>
+                            <li>端到端迭代周期缩短15%</li>
+                            <li>标杆建设效率提升50%</li>
+                            <li>产品应用率提升40%，产值提升20%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 教育经历 -->
+                <div class="relative timeline-item lazy-load">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">教育背景</h3>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h4 class="font-semibold">西北农林科技大学</h4>
+                                    <span class="text-sm">2014.08 - 2018.07</span>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">信息管理与信息系统 | 本科</p>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h4 class="font-semibold">空军工程大学</h4>
+                                    <span class="text-sm">2019.10 - 2021.12</span>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-300">管理科学与工程 | 硕士</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目成果 -->
+        <section id="projects" class="mb-20">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-3">项目<span class="text-primary-light dark:text-primary-dark">成果</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">从0到1打造产品，创造可衡量的业务价值</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                <!-- 企业数据库项目 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 lazy-load project-card">
+                    <div class="md:flex h-full">
+                        <div class="md:w-1/3 p-0 bg-gray-50 dark:bg-gray-700">
+                            <div class="project-image-container w-full h-full">
+                                <img src="https://img.freepik.com/free-vector/big-data-analytics-abstract-concept-illustration_335657-4817.jpg" alt="企业数据库项目" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 p-5 flex flex-col h-full">
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="text-xl font-bold">企业数据库（从0到1冷启动）</h3>
+                                    <span class="text-sm bg-green-500 text-white px-2 py-1 rounded-full ml-2">2024.01 - 2024.08</span>
+                                </div>
+                                
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">为建设工程咨询企业提供基于数据智能审核，实现审核效率和风险覆盖率的提升</p>
+                                
+                                <h4 class="font-semibold mb-2 text-primary-light dark:text-primary-dark">项目亮点：</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 mb-4">
+                                    <li>3个月打造20家标杆客户，通过深度访谈聚焦用户核心需求</li>
+                                    <li>单项目审核时间从平均3天缩短至1天，审核效率提升60%</li>
+                                    <li>梳理用户业务，引导用户建库，打造标杆建设SOP</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">从0到1</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">B端SaaS</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">数据智能</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 目标成本项目 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 lazy-load project-card">
+                    <div class="md:flex h-full">
+                        <div class="md:w-1/3 p-0 bg-gray-50 dark:bg-gray-700">
+                            <div class="project-image-container w-full h-full">
+                                <img src="https://img.freepik.com/free-vector/construction-costs-abstract-concept-vector-illustration_335657-4324.jpg" alt="目标成本项目" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 p-5 flex flex-col h-full">
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="text-xl font-bold">目标成本（千万级收入）</h3>
+                                    <span class="text-sm bg-blue-500 text-white px-2 py-1 rounded-full ml-2">2022.04 - 2023.12</span>
+                                </div>
+                                
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">为地产中心提供建筑工程智能数据引擎与标准的全流程成本管控SaaS解决方案</p>
+                                
+                                <h4 class="font-semibold mb-2 text-primary-light dark:text-primary-dark">项目成果：</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 mb-4">
+                                    <li>产品应用率提升40%，产值提升20%</li>
+                                    <li>需求响应率92%，解决率70%，平均需求评审次数<3次</li>
+                                    <li>总结全国标杆建设SOP，样板客户建设速度提升10%</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">千万级收入</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">成本管控</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">SaaS解决方案</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 智能科目匹配项目 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 lazy-load project-card">
+                    <div class="md:flex h-full">
+                        <div class="md:w-1/3 p-0 bg-gray-50 dark:bg-gray-700">
+                            <div class="project-image-container w-full h-full">
+                                <img src="https://img.freepik.com/free-vector/artificial-intelligence-matching-abstract-concept-illustration_335657-3920.jpg" alt="智能科目匹配项目" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 p-5 flex flex-col h-full">
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="text-xl font-bold">智能科目匹配</h3>
+                                    <span class="text-sm bg-blue-500 text-white px-2 py-1 rounded-full ml-2">2023.01 - 2023.07</span>
+                                </div>
+                                
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">针对地产行业前期成本测算中标准科目体系命名差异导致的数据复用率低问题，训练智能匹配算法，帮助用户提升数据载入的准确度和效率</p>
+                                
+                                <h4 class="font-semibold mb-2 text-primary-light dark:text-primary-dark">项目亮点：</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 mb-4">
+                                    <li>设计"语义相似度+规则"双规模型，保证数据准确性</li>
+                                    <li>数据载入准确率提升30%，效率提升50%</li>
+                                    <li>实现数据复用率提升40%，降低用户重复工作量</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">智能匹配</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">数据复用</span>
+                                <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">效率提升</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI探索 -->
+        <section id="ai" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">AI技术<span class="text-primary-light dark:text-primary-dark">探索</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">前沿AI技术的实践应用与创新</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Prompt管理插件 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden lazy-load">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Prompt管理插件</h3>
+                            <a href="https://github.com/wxy390182638/AIprompt_manager" target="_blank" class="text-sm bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 px-2 py-1 rounded flex items-center">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">基于React+Manifest V3的浏览器插件，实现prompt的收藏、管理和借鉴功能。</p>
+                        
+                        <div class="video-container mb-4">
+                            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114237993255944&bvid=BV1j6oQYoEe7&cid=29106963313&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">React</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">Chrome扩展</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">Prompt工程</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自媒体分析Agent -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden lazy-load">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">自媒体分析Agent</h3>
+                            <a href="https://www.coze.cn/store/project/7479002062467006502?bid=6fpgf73qk301j" target="_blank" class="text-sm bg-blue-500 text-white px-2 py-1 rounded flex items-center">
+                                <i class="fas fa-external-link-alt mr-1"></i> 查看
+                            </a>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">运用Coze+多维表格打造高质量数据分析workflow，提升账号分析、爆款笔记分析等工作效率。</p>
+                        
+                        <div class="video-container mb-4">
+                            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114237993189471&bvid=BV1o6oQYdEHz&cid=29106965227&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">Coze</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">数据分析</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">自媒体</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 微信机器人 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden lazy-load">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">微信机器人</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">利用chatgpt-on-wechat开源框架构建微信机器人，并通过coze平台的机器人API接口完成集成，实现利用微信进行chatbot应用的使用，有助于深度探索大模型应用与prompt工程。</p>
+                        
+                        <h4 class="font-semibold mb-2 text-primary-light dark:text-primary-dark">项目亮点：</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300 mb-4">
+                            <li>基于开源框架快速构建，实现微信消息的接收与响应</li>
+                            <li>通过Coze平台API无缝集成，提供智能对话服务</li>
+                            <li>支持多样化的对话场景，深入探索Prompt工程应用</li>
+                        </ul>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">ChatGPT</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">Coze</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">微信开发</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视频生成Agent -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden lazy-load">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">视频生成Agent</h3>
+                            <a href="https://www.coze.cn/store/agent/7479033511589150747?bid=6fpgf9coo3g15&from=store_search_suggestion" target="_blank" class="text-sm bg-blue-500 text-white px-2 py-1 rounded flex items-center">
+                                <i class="fas fa-external-link-alt mr-1"></i> 查看
+                            </a>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">实现输入单一内容生成多平台适配视频（小红书/抖音/B站），生产效率提高50%。</p>
+                        
+                        <div class="video-container mb-4">
+                            <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=114237993124921&bvid=BV1i6oQYdEir&cid=29106964365&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">视频生成</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">多平台适配</span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded">效率提升</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="contact" class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 联系信息 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系<span class="text-primary-light dark:text-primary-dark">方式</span></h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-user text-gray-500 dark:text-gray-400 mr-3"></i>
+                            <span>王祥宇</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-gray-500 dark:text-gray-400 mr-3"></i>
+                            <span>183-9219-4486</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-500 dark:text-gray-400 mr-3"></i>
+                            <span>wangxy_95mail@163.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-weixin text-gray-500 dark:text-gray-400 mr-3"></i>
+                            <span>微信: 同手机号</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 社交媒体 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">社交<span class="text-primary-light dark:text-primary-dark">媒体</span></h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- 微信公众号 -->
+                        <div class="relative group">
+                            <a href="#" class="flex items-center justify-center bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm hover:shadow-md transition">
+                                <i class="fab fa-weixin text-green-500 text-xl mr-2"></i>
+                                <span>微信公众号</span>
+                            </a>
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block w-40 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-xl z-10">
+                                <img src="https://p3-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/0f3146afc37443eb8d8c5911b4fca0e0.jpg" alt="微信公众号二维码" class="w-full h-auto rounded">
+                                <p class="text-center text-xs mt-1">扫码关注</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 抖音 -->
+                        <div class="relative group">
+                            <a href="#" class="flex items-center justify-center bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm hover:shadow-md transition">
+                                <i class="fab fa-tiktok text-black dark:text-white text-xl mr-2"></i>
+                                <span>抖音</span>
+                            </a>
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block w-40 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-xl z-10">
+                                <img src="https://p9-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/b0c1318b135b499b9574b561a41ef6a0.jpg" alt="抖音二维码" class="w-full h-auto rounded">
+                                <p class="text-center text-xs mt-1">扫码关注</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 小红书 -->
+                        <div class="relative group">
+                            <a href="#" class="flex items-center justify-center bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm hover:shadow-md transition">
+                                <i class="fab fa-instagram text-pink-500 text-xl mr-2"></i>
+                                <span>小红书</span>
+                            </a>
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block w-40 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-xl z-10">
+                                <img src="https://p9-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/e148ba31e0514d199c988d1134f56f3a.jpg" alt="小红书二维码" class="w-full h-auto rounded">
+                                <p class="text-center text-xs mt-1">扫码关注</p>
+                            </div>
+                        </div>
+                        
+                        <!-- GitHub -->
+                        <div class="relative group">
+                            <a href="https://github.com/wxy390182638/Alprompt_manager" target="_blank" class="flex items-center justify-center bg-white dark:bg-gray-700 p-3 rounded-lg shadow-sm hover:shadow-md transition">
+                                <i class="fab fa-github text-gray-800 dark:text-gray-200 text-xl mr-2"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mt-2 hidden group-hover:block w-40 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-xl z-10">
+                                <img src="https://p3-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/e32e5c2ac04c4136b9a0fa4f0cf681b7.jpg" alt="个人微信二维码" class="w-full h-auto rounded">
+                                <p class="text-center text-xs mt-1">个人微信</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 版权信息 -->
+                <div class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 col-span-2 border-t border-gray-200 dark:border-gray-700 mt-8 pt-6 text-center text-gray-500 dark:text-gray-400">
+                    <p class="text-sm sm:text-base py-2">&copy; 2025 王祥宇. 保留所有权利。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('color-theme') === 'dark' || (!localStorage.getItem('color-theme') && prefersDarkScheme.matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+        
+        // 移动端菜单切换
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 懒加载动画
+        const lazyLoadElements = document.querySelectorAll('.lazy-load');
+        
+        const lazyLoadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('loaded');
+                    lazyLoadObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        lazyLoadElements.forEach(element => {
+            lazyLoadObserver.observe(element);
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // 如果是移动端菜单，点击后隐藏菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
